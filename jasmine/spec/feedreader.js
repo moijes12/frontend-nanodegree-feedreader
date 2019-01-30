@@ -27,16 +27,36 @@ $(function() {
         });
 
 
-        /* TODO: Write a test that loops through each feed
-         * in the allFeeds object and ensures it has a URL defined
-         * and that the URL is not empty.
+        /**
+         * Validate that each feed has a non-empty URL
          */
+         it('Verify that feed conatins a non-empty URL', function() {
+            // Loop through each feed
+            allFeeds.forEach(function(feed) {
 
+            // Validate that URL is defined
+            expect(feed.url).toBeDefined();
 
-        /* TODO: Write a test that loops through each feed
-         * in the allFeeds object and ensures it has a name defined
-         * and that the name is not empty.
+            // Validate that URL is non-empty
+            expect(feed.url.length).not.toBe(0);
+            });
+        });
+
+        /**
+         * Verify that each feed has a non-empty name.
          */
+        it('Verify that each feed has a non-empty name', function() {
+
+            // Loop through each feed
+            allFeeds.forEach(function(feed) {
+
+            // Make sure that `NAME` is defined
+            expect(feed.name).toBeDefined();
+
+            // Ensure that it is NOT empty
+            expect(feed.name.length).not.toBe(0);
+            });
+        }); 
     });
 
 
