@@ -62,7 +62,7 @@ $(function() {
     });
 
 
-    /* TODO: Write a new test suite named "The menu" */
+    /*A test suite named "The menu" */
     describe('The menu', function() {
 
         /* Verify that ensures the menu element is
@@ -90,14 +90,25 @@ $(function() {
 
     });
 
-    /* TODO: Write a new test suite named "Initial Entries" */
+    /*A test suite named "Initial Entries" */
+    describe('Initial Entries', function() {
 
-        /* TODO: Write a test that ensures when the loadFeed
+        /* Verify that  when the loadFeed
          * function is called and completes its work, there is at least
          * a single .entry element within the .feed container.
-         * Remember, loadFeed() is asynchronous so this test will require
-         * the use of Jasmine's beforeEach and asynchronous done() function.
          */
+        let feedContainer = document.querySelector(".feed");
+
+        // Take 2,5s to load the default feed [Async]
+        beforeEach(function(done) {
+            loadFeed(0, done);
+        });
+
+        // Make sure that it returns atleast one feed
+        it('must contain at least ONE feed', function() {
+            expect(feedContainer.children.length).toBeGreaterThan(0);
+        });
+    });
 
     /* TODO: Write a new test suite named "New Feed Selection" */
 
