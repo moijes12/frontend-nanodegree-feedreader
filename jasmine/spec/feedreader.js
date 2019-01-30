@@ -1,3 +1,5 @@
+"use strict";
+
 /* feedreader.js
  *
  * This is the spec file that Jasmine will read and contains
@@ -61,18 +63,32 @@ $(function() {
 
 
     /* TODO: Write a new test suite named "The menu" */
+    describe('The menu', function() {
 
-        /* TODO: Write a test that ensures the menu element is
-         * hidden by default. You'll have to analyze the HTML and
-         * the CSS to determine how we're performing the
-         * hiding/showing of the menu element.
+        /* Verify that ensures the menu element is
+         * hidden by default. 
          */
+        it('Verify that ensures the menu element is hidden by default.', function() {
+            // Check if the `body` contains the `menu-hidden` class
+            expect(document.body.classList.contains("menu-hidden")).toBe(true);
+        });
 
-         /* TODO: Write a test that ensures the menu changes
-          * visibility when the menu icon is clicked. This test
-          * should have two expectations: does the menu display when
-          * clicked and does it hide when clicked again.
-          */
+        /* Verify that ensures the menu changes
+         * visibility when the menu icon is clicked. This test
+         * should have two expectations: does the menu display when
+         * clicked and does it hide when clicked again.
+         */
+        it('Verify that ensures the menu changes visibility when the menu icon is clicked.', function() {
+            const menuButton = document.querySelector(".menu-icon-link");
+            const clickEvent = new CustomEvent("click");
+
+            menuButton.dispatchEvent(clickEvent); // Click
+            expect(document.body.classList.toggle("menu-hidden")).toBe(true); // Show Menu
+            menuButton.dispatchEvent(clickEvent); // Click Again
+            expect(document.body.classList.toggle("menu-hidden")).toBe(true); // Hide Menu
+        });
+
+    });
 
     /* TODO: Write a new test suite named "Initial Entries" */
 
