@@ -28,7 +28,6 @@ $(function() {
             expect(allFeeds.length).not.toBe(0);
         });
 
-
         /**
          * Validate that each feed has a non-empty URL
          */
@@ -48,7 +47,6 @@ $(function() {
          * Verify that each feed has a non-empty name.
          */
         it('Verify that each feed has a non-empty name', function() {
-
             // Loop through each feed
             allFeeds.forEach(function(feed) {
 
@@ -64,7 +62,6 @@ $(function() {
 
     /*A test suite named "The menu" */
     describe('The menu', function() {
-
         /* Verify that ensures the menu element is
          * hidden by default. 
          */
@@ -92,7 +89,6 @@ $(function() {
 
     /*A test suite named "Initial Entries" */
     describe('Initial Entries', function() {
-
         /* Verify that  when the loadFeed
          * function is called and completes its work, there is at least
          * a single .entry element within the .feed container.
@@ -105,15 +101,33 @@ $(function() {
         });
 
         // Make sure that it returns atleast one feed
-        it('must contain at least ONE feed', function() {
+        it('Verify that feed container contains at least one feed', function() {
             expect(feedContainer.children.length).toBeGreaterThan(0);
         });
     });
 
-    /* TODO: Write a new test suite named "New Feed Selection" */
 
-        /* TODO: Write a test that ensures when a new feed is loaded
+    /**
+     * The test suite to validate 'New Feed Selection'.
+     */
+    describe('New Feed Selection', function() {
+        /* Verify that when a new feed is loaded
          * by the loadFeed function that the content actually changes.
-         * Remember, loadFeed() is asynchronous.
          */
+        it('Verify that when a new feed is loaded by the loadFeed function that the content actually changes', function() {
+            let currentContent;
+
+            beforeEach(function(done) {
+                loadFeed(0, function() {
+                    // Store the current content
+                    currentContent = document.querySelector(".feed").innerHTML;
+                    // Load another Feed
+                    loadFeed(1, done);
+                });
+            });
+            
+            // Compare the current feed's container with the previous one
+            expect(document.querySelector(".feed").innerHTML).not.toBe(currentContent);
+        });
+    });
 }());
