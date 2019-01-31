@@ -93,8 +93,6 @@ $(function() {
          * function is called and completes its work, there is at least
          * a single .entry element within the .feed container.
          */
-        let feedContainer = document.querySelector(".feed");
-
         // Take 2,5s to load the default feed [Async]
         beforeEach(function(done) {
             loadFeed(0, done);
@@ -102,7 +100,7 @@ $(function() {
 
         // Make sure that it returns atleast one feed
         it('Verify that feed container contains at least one feed', function() {
-            expect(feedContainer.children.length).toBeGreaterThan(0);
+            expect($('.feed .entry').length).toBeGreaterThan(0);
         });
     });
 
@@ -114,17 +112,17 @@ $(function() {
         /* Verify that when a new feed is loaded
          * by the loadFeed function that the content actually changes.
          */
-        it('Verify that when a new feed is loaded by the loadFeed function that the content actually changes', function() {
-            let currentContent;
+        let currentContent;
 
-            beforeEach(function(done) {
-                loadFeed(0, function() {
-                    // Store the current content
-                    currentContent = document.querySelector(".feed").innerHTML;
-                    // Load another Feed
-                    loadFeed(1, done);
-                });
+        beforeEach(function(done) {
+            loadFeed(0, function() {
+                // Store the current content
+                currentContent = document.querySelector(".feed").innerHTML;
+                // Load another Feed
+                loadFeed(1, done);
             });
+        });
+        it('Verify that when a new feed is loaded by the loadFeed function that the content actually changes', function() {
             
             // Compare the current feed's container with the previous one
             expect(document.querySelector(".feed").innerHTML).not.toBe(currentContent);
